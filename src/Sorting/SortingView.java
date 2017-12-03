@@ -353,6 +353,7 @@ public class SortingView extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         S.Intercalacion(B);
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
