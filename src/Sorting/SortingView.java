@@ -77,6 +77,24 @@ public class SortingView extends javax.swing.JFrame {
         modelo.addRow(T);
         
     }
+    public void divArreglo(Alumno X[]){
+        F=new Alumno[X.length/2];
+        G=new Alumno[X.length/2];
+        for(int i=0;i<X.length/2;i++){
+            F[i]=X[i];
+        }
+        for(int j=20;j<X.length;j++){
+            G[j-20]=X[j];
+        }
+    }
+    public void rehacer(Alumno Y[]){
+        limpiar();
+        System.out.println("aaa");
+        limpiar();
+        for(int i=0;i<Y.length;i++){
+            AñadirTabla(Y[i]);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,8 +108,8 @@ public class SortingView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblInter = new javax.swing.JLabel();
+        lblShell = new javax.swing.JLabel();
         lblRadix = new javax.swing.JLabel();
         lblQuick = new javax.swing.JLabel();
         lblBubble = new javax.swing.JLabel();
@@ -115,17 +133,32 @@ public class SortingView extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ordenacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Merge.png"))); // NOI18N
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/intercalacion.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jPanel4MouseClicked(evt);
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/shellsort.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Merge.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+
+        lblInter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/intercalacion.png"))); // NOI18N
+        lblInter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblInterMouseClicked(evt);
+            }
+        });
+
+        lblShell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/shellsort.png"))); // NOI18N
+        lblShell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblShellMouseClicked(evt);
+            }
+        });
 
         lblRadix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/radix.png"))); // NOI18N
         lblRadix.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,8 +181,8 @@ public class SortingView extends javax.swing.JFrame {
             }
         });
 
-        cmbOrdena.setBackground(new java.awt.Color(51, 51, 51));
-        cmbOrdena.setForeground(new java.awt.Color(255, 255, 255));
+        cmbOrdena.setBackground(new java.awt.Color(255, 255, 255));
+        cmbOrdena.setForeground(new java.awt.Color(0, 0, 0));
         cmbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Criterio de Ordenación", "Nombre", "Edad", "No.Ctrl", "Prom" }));
         cmbOrdena.setBorder(null);
 
@@ -175,7 +208,7 @@ public class SortingView extends javax.swing.JFrame {
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(lblInter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblRadix)
@@ -185,7 +218,7 @@ public class SortingView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(lblShell)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -200,9 +233,9 @@ public class SortingView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblQuick)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblShell)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(lblInter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6))
         );
@@ -211,6 +244,8 @@ public class SortingView extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextField2.setText("jTextField2");
@@ -323,38 +358,44 @@ public class SortingView extends javax.swing.JFrame {
     private void lblBubbleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBubbleMouseClicked
         int a=cmbOrdena.getSelectedIndex();
         Alumno C[]=S.BubbleSort(B, S.opcion(a));
-        limpiar();
-        for(int i=0;i<C.length;i++){
-            AñadirTabla(C[i]);
-        }
+        rehacer(C);
     }//GEN-LAST:event_lblBubbleMouseClicked
 
     private void lblRadixMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRadixMouseClicked
         int a=cmbOrdena.getSelectedIndex();
         Alumno C[]=S.radixSort(B,S.opcion(a));
-        limpiar();
-        System.out.println("aaa");
-        limpiar();
-        for(int i=0;i<C.length;i++){
-            AñadirTabla(C[i]);
-        }
+        rehacer(C);
     }//GEN-LAST:event_lblRadixMouseClicked
 
     private void lblQuickMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuickMouseClicked
         int a=cmbOrdena.getSelectedIndex();
         Alumno C[]=S.QuickSort(B,0, B.length-1, S.opcion(a));
-        limpiar();
-        System.out.println("aaa");
-        limpiar();
-        for(int i=0;i<C.length;i++){
-            AñadirTabla(C[i]);
-        }
+        rehacer(C);
     }//GEN-LAST:event_lblQuickMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        S.Intercalacion(B);
+    private void lblInterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInterMouseClicked
+        int a=cmbOrdena.getSelectedIndex();
+        Alumno X[]=S.BubbleSort(B,S.opcion(a));
+        divArreglo(X);
+        Alumno aux[]=S.Intercalacion(F, G);
+        rehacer(aux);
+    }//GEN-LAST:event_lblInterMouseClicked
 
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void lblShellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShellMouseClicked
+        int a=cmbOrdena.getSelectedIndex();
+        Alumno C[]=S.shellSort(B, S.opcion(a));
+        rehacer(C);
+    }//GEN-LAST:event_lblShellMouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        int a=cmbOrdena.getSelectedIndex();
+        Alumno C[]=S.Mezcla(B,S.opcion(a));
+        rehacer(C);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -390,16 +431,13 @@ public class SortingView extends javax.swing.JFrame {
             }
         });
     }
-    private Ordenacion O = new Ordenacion(40);
-    private Alumno A = new Alumno(),B[];
+    private Alumno A = new Alumno(),B[],F[],G[],H[];
     private Materia C = new Materia();
     private Sorting S=new Sorting(40);
     private DefaultTableModel modelo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbOrdena;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -412,8 +450,10 @@ public class SortingView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblBubble;
+    private javax.swing.JLabel lblInter;
     private javax.swing.JLabel lblQuick;
     private javax.swing.JLabel lblRadix;
+    private javax.swing.JLabel lblShell;
     private javax.swing.JTable tblAlumnos;
     // End of variables declaration//GEN-END:variables
 }
