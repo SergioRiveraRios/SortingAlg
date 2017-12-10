@@ -6,7 +6,7 @@
 package Sorting;
 
 import static javax.swing.JOptionPane.showMessageDialog;
-//Hola pinche putita
+
 /**
  *
  * @author sergio
@@ -222,32 +222,139 @@ public class Sorting {
     public void QuickSort(Alumno C[],String cad) {
         QuickSort(C, 0, C.length - 1,cad);
     }
-    public Alumno[] Intercalacion(Alumno D[]){
-        Alumno F[]=new Alumno[D.length/2];
-        Alumno G[]=new Alumno[D.length/2];
-        Alumno H[]=new Alumno[F.length +G.length];
-            int i,j,k;
-        for(int a=0;a<F.length;a++){
-            F[a]=D[a];
-        }
-        for(int b=D.length/2;b<G.length;b++){
-            G[b-D.length/2]=D[b];
-        }
-        for (i = j = k = 0; i < F.length && j < G.length; k++) {
-            if (F[i].getEdad()<G[j].getEdad()) {
-                H[k] = F[i];
+    public Alumno[] shellSort(Alumno A[],String cad) {
+        int salto, i;
+        Alumno aux;
+        boolean cambios;
+        for (salto=A.length/2;salto!=0;salto=salto/2) {
+            cambios=true;
+            while (cambios) { // Mientras se intercambie alg˙n elemento
+                cambios = false;
+                for (i = salto; i < A.length; i++) // se da una pasada
+                {
+                    if(cad.equals("Nombre")){
+                        if (A[i - salto].getNombre().compareToIgnoreCase(A[i].getNombre()) > 0) { // y si est·n desordenados
+                            aux = A[i]; // se reordenan
+                            A[i] = A[i - salto];
+                            A[i - salto] = aux;
+                            cambios = true; // y se marca como cambio.
+                        }//if
+                    }
+                    else{
+                        if(cad.equals("Edad")){
+                            if (A[i - salto].getEdad()>A[i].getEdad()){ // y si est·n desordenados
+                                aux = A[i]; // se reordenan
+                                A[i] = A[i - salto];
+                                A[i - salto] = aux;
+                                cambios = true; // y se marca como cambio.
+                            }//if
+                        }
+                        else{
+                        if(cad.equals("Numc")){
+                            if (A[i - salto].getNumC().compareToIgnoreCase(A[i].getNumC())>0){ // y si est·n desordenados
+                                aux = A[i]; // se reordenan
+                                A[i] = A[i - salto];
+                                A[i - salto] = aux;
+                                cambios = true; // y se marca como cambio.
+                            }//if
+                        }
+                        else{
+                            if (A[i - salto].getMat().getProm()>A[i].getMat().getProm()){ // y si est·n desordenados
+                                aux = A[i]; // se reordenan
+                                A[i] = A[i - salto];
+                                A[i - salto] = aux;
+                                cambios = true; // y se marca como cambio.
+                            }//if
+                        }
+                    }
+                    }
+                }
+            }//wile
+        }//For
+        return A;
+    }//ShellSortNombre
+    public Alumno[] Intercalacion(Alumno C[], Alumno D[]) {
+        int i,j,k;
+        Alumno aux[] = new Alumno[C.length + D.length];
+        for (i = j = k = 0; i < C.length && j < D.length; k++) {
+            if (C[i].getNombre().compareToIgnoreCase(D[j].getNombre()) < 0) {
+                aux[k] = C[i];
                 i++;
             } else {
-                H[k] = G[j];
+                aux[k] = D[j];
                 j++;
             }
         }
-        for (; i < F.length; i++, k++) {
-            H[k] = F[i];
+        for (; i < C.length; i++, k++) {
+            aux[k] = C[i];
         }
-        for (; j < G.length; j++, k++) {
-            H[k] = G[j];
+        for (; j < D.length; j++, k++) {
+            aux[k] = D[j];
         }
-        return H;
+        
+        return aux;
     }
+    public Alumno[] Mezcla(Alumno A[],String cad) {
+        mergesort(A, 0, tam - 1,cad);
+        return A;
+    }
+    public void mergesort(Alumno A[], int izq, int der,String cad) {
+        if (izq < der) {
+            int m = (izq + der) / 2;
+            mergesort(A, izq, m,cad);
+            mergesort(A, m + 1, der,cad);
+            merge(A, izq, m, der,cad);
+        }
+    }
+    public void merge(Alumno A[], int izq, int m, int der,String cad) {
+        int i, j, k;
+        Alumno B[] = new Alumno[A.length]; //array auxiliar
+        for (i = izq; i <= der; i++) //copia ambas mitades en el array auxiliar
+        {
+            B[i] = A[i];
+        }
+        i = izq;
+        j = m + 1;
+        k = izq;
+        while (i <= m && j <= der) //copia el siguiente elemento más grande
+        {
+            if(cad.equals("Nombre")){
+                if (B[i].getNombre().compareToIgnoreCase(B[j].getNombre())<0) {
+                    A[k++] = B[i++];
+                } else {
+                    A[k++] = B[j++];
+                }
+            }//nombre
+            else{
+                if(cad.equals("Edad")){
+                    if (B[i].getEdad()<B[j].getEdad()) {
+                        A[k++] = B[i++];
+                    } else {
+                        A[k++] = B[j++];
+                    }
+                }
+                else{
+                    if(cad.equals("NumC")){
+                        if (Integer.parseInt(B[i].getNumC())<Integer.parseInt(B[j].getNumC())) {
+                            A[k++] = B[i++];
+                        } else {
+                            A[k++] = B[j++];
+                        }
+                    }else{
+                        if (B[i].getMat().getProm()< B[j].getMat().getProm()) {
+                            A[k++] = B[i++];
+                        } else {
+                            A[k++] = B[j++];
+                        }
+                    }
+                }
+            }
+            
+        }
+        while (i <= m) //copia los elementos que quedan de la
+        {
+            A[k++] = B[i++]; //primera mitad (si los hay)
+        }
+    }
+    
 }
