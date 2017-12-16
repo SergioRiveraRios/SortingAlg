@@ -12,11 +12,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author sergio
  */
 public class Sorting {
-    private int tam, tope = -1;
+    private int tam;
     public Sorting() {
         tam = 0;
-        tope = -1;
-
     }
     public Sorting(int tam) {
         this.tam = tam;
@@ -42,6 +40,7 @@ public class Sorting {
         }
         return cad;
     }
+
     public Alumno[] BubbleSort(Alumno C[],String cad) {
         for (int p = 1; p < tam; p++) {
             for (int i = 0; i < tam - p; i++) {
