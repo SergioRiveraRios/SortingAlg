@@ -24,8 +24,17 @@ public class Search {
         String cat = "";
         switch (a) {
             case 1:
-                cat = "Numc";
-                break;
+                cat="Nombre";
+            break;
+            case 2:
+                cat="Edad";
+            break;
+            case 3:
+                cat="NumC";
+            break;
+            case 4:
+                cat="Prom";
+            break;
             default:
                 cat = "aa";
                 showMessageDialog(null, cat);
@@ -34,32 +43,76 @@ public class Search {
     }
     public int Secuencial(Alumno A[],String OP, String dato) {
         int posicion = -1;
-        for (int i = 0; i < tam; i++) {
-            if (OP.equals("Numc")) {
-                if (A[i].getNumC().equals(dato)) {
-                    posicion = i;
+        for (int i=0;i<A.length;i++) {
+            if(OP.equals("Nombre")){
+                if(A[i].getNombre().equals(dato)){
+                    return posicion=i;
+                }
+            }//Nombre
+            else{
+                if(OP.equals("Edad")){
+                    if(A[i].getEdad()==Integer.parseInt(dato)){
+                        return posicion=i;
+                    }
+                }//Edad
+                else{
+                    if(OP.equals("NumC")){
+                        if(A[i].getNumC().equals(dato)){
+                            return posicion=i;
+                        }
+                    }//NumC
+                    else{
+                        if(A[i].getMat().getProm()==Integer.parseInt(dato)){
+                            return posicion=i;
+                        }
+                    }//Prom
                 }
             }
         }
         return posicion;
     }//BusquedaSecuencial 
-    public void busquedaBinaria(Alumno A[],String OP, String dato) {
+    public String getDato(Alumno B,String OP){
+        String temp="";
+        switch(OP){
+            case "Nombre":
+                temp=B.getNombre();
+            break;
+            case "Edad":
+                temp=B.getEdad()+"";
+            break;
+            case "NumC":
+                temp=B.getNumC();
+            break;
+            case "Prom":
+                temp=B.getMat().getProm()+"";
+            break;
+            default:
+                showMessageDialog(null,"Erros");
+            break;
+        }
+        return temp;
+    }
+    public int busquedaBinaria(Alumno A[],String OP, String dato) {
         int n = A.length;
         int centro = 0, inf = 0, sup = n - 1;
-        if (OP.equals("Numc")) {
+        if (OP.equals("Nombre")) {
             while (inf <= sup) {
                 centro = (sup + inf) / 2;
-                if (A[centro].getNumC().equals(dato)) {
-                    System.out.println(centro + "Entre");
-                    return;
-                } else if (dato.compareToIgnoreCase(A[centro].getNumC())<0) {
+                if (getDato(A[centro],OP).equals(dato)) {
+                    return centro;
+                } else if (dato.compareToIgnoreCase(A[centro].getNombre())<0) {
                     sup = centro - 1;
                 } else {
                     inf = centro + 1;
                 }
             }
+        }//NumC
+        else{
+            if(OP.equals("Edad")){
+                
+            }
         }
-        System.out.println(centro);
+        return centro;
     }//BusquedaBinaria
     public void RellenaArrayHash(){
         for(int i=0;i<Hash.length;i++){
