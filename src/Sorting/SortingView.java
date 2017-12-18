@@ -7,9 +7,12 @@ package Sorting;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import static javax.swing.JOptionPane.*;
 import javax.swing.table.TableCellEditor;
@@ -27,6 +30,7 @@ public class SortingView extends javax.swing.JFrame {
         initComponents();
         modelo = (DefaultTableModel) tblAlumnos.getModel();
         agregarDatos();
+        
     }
     public void limpiar() {
         for (int i = 0; i < tblAlumnos.getRowCount(); i++) {
@@ -98,6 +102,15 @@ public class SortingView extends javax.swing.JFrame {
             AñadirTabla(Y[i]);
         }
     }
+    public void Alumnos(int a){
+        Alumnos AS=new Alumnos();
+        AS.setAlumno(B[a]);
+        AS.setVisible(true);
+    }
+    public void Hash(){
+        
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,7 +123,7 @@ public class SortingView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblMerge = new javax.swing.JLabel();
         lblInter = new javax.swing.JLabel();
         lblShell = new javax.swing.JLabel();
         lblRadix = new javax.swing.JLabel();
@@ -122,7 +135,7 @@ public class SortingView extends javax.swing.JFrame {
         txtBusq = new javax.swing.JTextField();
         lblSec = new javax.swing.JLabel();
         lblBin = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblHash = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAlumnos = new javax.swing.JTable();
@@ -142,10 +155,10 @@ public class SortingView extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Merge.png"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblMerge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Merge.png"))); // NOI18N
+        lblMerge.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                lblMergeMouseClicked(evt);
             }
         });
 
@@ -209,7 +222,7 @@ public class SortingView extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
+                                        .addComponent(lblMerge)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(lblInter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -240,7 +253,7 @@ public class SortingView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblInter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6))
+                .addComponent(lblMerge))
         );
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
@@ -249,7 +262,7 @@ public class SortingView extends javax.swing.JFrame {
 
         cmbBusq.setBackground(new java.awt.Color(255, 255, 255));
         cmbBusq.setForeground(new java.awt.Color(0, 0, 0));
-        cmbBusq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBusq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona Opción", "Nombre", "Edad", "NumC", "Prom" }));
 
         lblSec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Secuencial.png"))); // NOI18N
         lblSec.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -259,8 +272,18 @@ public class SortingView extends javax.swing.JFrame {
         });
 
         lblBin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Binaria.png"))); // NOI18N
+        lblBin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBinMouseClicked(evt);
+            }
+        });
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hash.png"))); // NOI18N
+        lblHash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hash.png"))); // NOI18N
+        lblHash.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHashMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -275,7 +298,7 @@ public class SortingView extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblBin)
                     .addComponent(lblSec)
-                    .addComponent(jLabel9))
+                    .addComponent(lblHash))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -289,7 +312,7 @@ public class SortingView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addComponent(lblHash)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -337,6 +360,11 @@ public class SortingView extends javax.swing.JFrame {
             }
         ));
         tblAlumnos.setSelectionBackground(new java.awt.Color(51, 51, 51));
+        tblAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAlumnos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -397,17 +425,33 @@ public class SortingView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel4MouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void lblMergeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMergeMouseClicked
         int a=cmbOrdena.getSelectedIndex();
         Alumno C[]=S.Mezcla(B,S.opcion(a));
         rehacer(C);
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_lblMergeMouseClicked
 
     private void lblSecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSecMouseClicked
         int op=cmbBusq.getSelectedIndex();
-        int a=SE.Secuencial(B, SE.opcion(op), txtBusq.getText());
-        
+        int a=SE.sec(B, SE.opcion(op), txtBusq.getText());
+        showMessageDialog(null,a);
+        Alumnos(a);
     }//GEN-LAST:event_lblSecMouseClicked
+
+    private void lblBinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBinMouseClicked
+        int op=cmbBusq.getSelectedIndex();
+        int a=SE.busquedaBinaria(B, SE.opcion(op), txtBusq.getText());
+        showMessageDialog(null,a);
+        Alumnos(a);
+    }//GEN-LAST:event_lblBinMouseClicked
+
+    private void tblAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMouseClicked
+        Alumnos(tblAlumnos.getSelectedRow());
+    }//GEN-LAST:event_tblAlumnosMouseClicked
+
+    private void lblHashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHashMouseClicked
+        SE.Hash1(txtBusq.getText());
+    }//GEN-LAST:event_lblHashMouseClicked
 
     /**
      * @param args the command line arguments
@@ -451,8 +495,6 @@ public class SortingView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbBusq;
     private javax.swing.JComboBox<String> cmbOrdena;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -461,7 +503,9 @@ public class SortingView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBin;
     private javax.swing.JLabel lblBubble;
+    private javax.swing.JLabel lblHash;
     private javax.swing.JLabel lblInter;
+    private javax.swing.JLabel lblMerge;
     private javax.swing.JLabel lblQuick;
     private javax.swing.JLabel lblRadix;
     private javax.swing.JLabel lblSec;

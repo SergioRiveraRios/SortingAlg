@@ -41,36 +41,15 @@ public class Search {
         }
         return cat;
     }
-    public int Secuencial(Alumno A[],String OP, String dato) {
-        int posicion = -1;
-        for (int i=0;i<A.length;i++) {
-            if(OP.equals("Nombre")){
-                if(A[i].getNombre().equals(dato)){
-                    return posicion=i;
-                }
-            }//Nombre
-            else{
-                if(OP.equals("Edad")){
-                    if(A[i].getEdad()==Integer.parseInt(dato)){
-                        return posicion=i;
-                    }
-                }//Edad
-                else{
-                    if(OP.equals("NumC")){
-                        if(A[i].getNumC().equals(dato)){
-                            return posicion=i;
-                        }
-                    }//NumC
-                    else{
-                        if(A[i].getMat().getProm()==Integer.parseInt(dato)){
-                            return posicion=i;
-                        }
-                    }//Prom
-                }
+    public int sec(Alumno A[],String OP,String dato){
+        int pos=-1;
+        for(int i=0;i<A.length;i++){
+            if(getDato(A[i],OP).equals(dato)){
+                return pos=i;
             }
         }
-        return posicion;
-    }//BusquedaSecuencial 
+        return pos;
+    }
     public String getDato(Alumno B,String OP){
         String temp="";
         switch(OP){
@@ -95,23 +74,16 @@ public class Search {
     public int busquedaBinaria(Alumno A[],String OP, String dato) {
         int n = A.length;
         int centro = 0, inf = 0, sup = n - 1;
-        if (OP.equals("Nombre")) {
             while (inf <= sup) {
                 centro = (sup + inf) / 2;
                 if (getDato(A[centro],OP).equals(dato)) {
                     return centro;
-                } else if (dato.compareToIgnoreCase(A[centro].getNombre())<0) {
+                } else if (dato.compareToIgnoreCase(getDato(A[centro],OP))<0) {
                     sup = centro - 1;
                 } else {
                     inf = centro + 1;
                 }
             }
-        }//NumC
-        else{
-            if(OP.equals("Edad")){
-                
-            }
-        }
         return centro;
     }//BusquedaBinaria
     public void RellenaArrayHash(){
@@ -152,7 +124,7 @@ public class Search {
             }
         }
         if (B[p] != null) {
-            System.out.println("El alumno " + cad + " se encuentra en la posición " + p + " en la tabla de HASH");
+            showMessageDialog(null,"El alumno " + cad + " se encuentra en la posición " + p + " en la tabla de HASH");
         } else {
             System.out.println("El alumno que está buscando no existe");
         }

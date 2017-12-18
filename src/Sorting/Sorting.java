@@ -42,6 +42,27 @@ public class Sorting {
         }
         return cad;
     }
+    public String getDato(Alumno B,String OP){
+        String temp="";
+        switch(OP){
+            case "Nombre":
+                temp=B.getNombre();
+            break;
+            case "Edad":
+                temp=B.getEdad()+"";
+            break;
+            case "NumC":
+                temp=B.getNumC();
+            break;
+            case "Prom":
+                temp=B.getMat().getProm()+"";
+            break;
+            default:
+                showMessageDialog(null,"Erros");
+            break;
+        }
+        return temp;
+    }
     public Alumno[] BubbleSort(Alumno C[],String cad) {
         for (int p = 1; p < tam; p++) {
             for (int i = 0; i < tam - p; i++) {
